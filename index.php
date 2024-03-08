@@ -54,11 +54,11 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>ひと言掲示板hoge</title>
+<title>ひと言掲示板akak</title>
 
 </head>
 <body>
-<h1>ひと言掲示板hoge</h1>
+<h1>ひと言掲示板korededou</h1>
 <form method="post">
 	<div>
 		<label for="view_name">表示名</label>
