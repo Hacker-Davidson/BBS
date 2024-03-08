@@ -2,7 +2,7 @@
 
 //メッセージを保存するファイルのパス設定
 define('FILENAME','./message.txt');
-define('IMAGEPLACE', './image_after');
+define('IMAGEPLACE', './images_after');
 
 //タイムゾーン設定
 date_default_timezone_set('Asia/Tokyo');
@@ -21,7 +21,7 @@ if(!empty($_FILES)){
     #$_FILESからファイル名取得
     $filename = $_FILES['upload_image']['name'];
     #$_FILESからから保存先の取得と、images_afterというローカルフォルダに移す
-    $uploaded_path = IMAGEPLACE.$filename;
+    $uploaded_path = 'images_after/'.$filename;
 
     $result = move_uploaded_file($_FILES['upload_image']['tmp_name'],$uploaded_path);
 
@@ -129,15 +129,15 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 	</div>
 	<p><?php echo $value['message']; ?></p>
     <!--メッセージを表示しているところ-->
-    <p><?php if(!empty($MSG)) echo $MSG;?></p>
+    <p><?php if(!empty($MSG)) echo $MSG;?>
     
     <!--画像を表示している箇所-->
-    <p><?php
-        if(!empty($img_path)){?>
-            <img src = "echo<?php $img_path;?>" alt="">
+    <?php
+        if(!empty($img_path)){;?>
+            <img src = "<?php echo $img_path;?>" alt="">
             <?php
-        }
-        ?>
+        };
+        ?></p>
 </article>
 <?php endforeach; ?>
 <?php endif; ?>
