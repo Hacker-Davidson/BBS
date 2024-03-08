@@ -51,7 +51,7 @@ if ( !empty($_POST['btn_submit']) ){
             $current_date = date("Y-m-d H:i:s");
 
             //書き込むデータの作成
-            $data = "'".$_POST['view_name']."','".$_POST['message']."','".$current_date."'\n";
+            $data = "'".$_POST['view_name']."','".$_POST['message']."','".$current_date."','".$uploaded_path."'\n";
 
             //書き込み
             fwrite($file_handle, $data);
@@ -66,14 +66,15 @@ if ( !empty($_POST['btn_submit']) ){
 
 }
 
-if( $file_handle = fopen( FILENAME,'r') ) {
+if( $file_handle = fopen(FILENAME,'r') ) {
     while( $data = fgets($file_handle) ){
         $split_data = preg_split( '/\'/', $data);
 
         $message = array(
             'view_name' => $split_data[1],
             'message' => $split_data[3],
-            'post_date' => $split_data[5]
+            'post_date' => $split_data[5],
+            'img_data' => $split_data[7]
         );
         array_unshift( $message_array, $message);
     }
@@ -137,7 +138,7 @@ if( $file_handle = fopen( FILENAME,'r') ) {
         <!--画像を表示している箇所-->
         <?php
             if(!empty($img_path)){;?>
-                <img src = "<?php echo $img_path;?>" alt="">
+                <img src = "<?php echo $value['img_data'];?>" alt="">
                 <?php
             };
             ?></p>
