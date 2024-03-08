@@ -88,7 +88,10 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 <head>
 <meta charset="utf-8">
 <title>ひと言掲示板</title>
-
+<style>
+    #box{overflow-y:scroll;height:500px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 2px #000;}
+    #moveBtn{font-size:40px;color:#FFF;background-color:#00CCCC;right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:52px;width:52px;z-index:2;opacity:0.6;}
+</style>
 </head>
 <body>
 <h1>ひと言掲示板</h1>
@@ -118,29 +121,62 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 </form>
 <!-- ここにメッセージの入力フォームを設置 -->
 <hr>
-<section>
-<!-- ここに投稿されたメッセージを表示 -->
-<?php if( !empty($message_array) ): ?>
-<?php foreach( $message_array as $value ): ?>
-<article>
-	<div class="info">
-		<h2><?php echo $value['view_name']; ?></h2>
-		<time><?php echo date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
-	</div>
-	<p><?php echo $value['message']; ?></p>
-    <!--メッセージを表示しているところ-->
-    <p><?php if(!empty($MSG)) echo $MSG;?>
-    
-    <!--画像を表示している箇所-->
-    <?php
-        if(!empty($img_path)){;?>
-            <img src = "<?php echo $img_path;?>" alt="">
-            <?php
-        };
-        ?></p>
-</article>
-<?php endforeach; ?>
-<?php endif; ?>
-</section>
+<div id="box">
+    <!-- ここに投稿されたメッセージを表示 -->
+    <?php if( !empty($message_array) ): ?>
+    <?php foreach( $message_array as $value ): ?>
+    <article>
+        <div class="info">
+            <h2><?php echo $value['view_name']; ?></h2>
+            <time><?php echo date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
+        </div>
+        <p><?php echo $value['message']; ?></p>
+        <!--メッセージを表示しているところ-->
+        <p><?php if(!empty($MSG)) echo $MSG;?>
+        
+        <!--画像を表示している箇所-->
+        <?php
+            if(!empty($img_path)){;?>
+                <img src = "<?php echo $img_path;?>" alt="">
+                <?php
+            };
+            ?></p>
+    </article>
+    <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
+<p id="moveBtn" onclick="moveTop()">▲</p>
+<script>
+    let box=document.getElementById("box");
+    let topBtn=class{
+    constructor(y,blue,defaultc){
+        this.y=y;
+        this.blue=blue;
+        this.defaultc=defaultc;
+    }
+    }
+    let topInstance=new topBtn(0,"background:blue;","background:#00CCCC;");
+    let moveBtn=document.getElementById("moveBtn");
+    let moveTop=function(n=true){
+    moveBtn.style=topInstance.blue;
+    if(n==true && box.scrollTop>topInstance.y){
+        let cnt=0;
+        function cntUp(){
+        cnt++;
+        let time=setTimeout(cntUp,100);
+        console.log(cnt);
+        if(cnt==2){
+            clearTimeout(time);
+            console.log("quit");
+            moveBtn.style=topInstance.defaultc;
+        }
+        }
+        cntUp();
+    }
+    else{moveBtn.style=topInstance.defaultc;}
+    box.scrollTop=topInstance.y; //0
+    }
+</script>
 </body>
 </html>
