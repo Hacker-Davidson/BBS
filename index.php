@@ -2,6 +2,7 @@
 
 //メッセージを保存するファイルのパス設定
 define('FILENAME','./message.txt');
+define('IMAGEPLACE', './image_after');
 
 //タイムゾーン設定
 date_default_timezone_set('Asia/Tokyo');
@@ -16,6 +17,22 @@ $message_array = array();
 $success_message = null;
 $error_message = array();
 
+if(!empty($_FILES)){
+    #$_FILESからファイル名取得
+    $filename = $_FILES['upload_image']['name'];
+    #$_FILESからから保存先の取得と、images_afterというローカルフォルダに移す
+    $uploaded_path = IMAGEPLACE.$filename;
+
+    $result = move_uploaded_file($_FILES['upload_image']['tmp_name'],$uploaded_path);
+
+    if($result){
+        $MSG = 'アップロード成功！ファイル名：'.$filename;
+        $img_path = $uploaded_path;
+      }else{
+        $MSG = 'アップロード失敗！エラーコード：'.$_FILES['upload_image']['error'];
+      }
+}
+    
 if ( !empty($_POST['btn_submit']) ){
 
     if(empty($_POST['view_name'])){
@@ -85,7 +102,7 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 		<?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-<form method="post">
+<form method="post", enctype = "multipart/form-data">
 	<div>
 		<label for="view_name">表示名</label>
 		<input id="view_name" type="text" name="view_name" value="">
@@ -94,6 +111,9 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 		<label for="message">ひと言メッセージ</label>
 		<textarea id="message" name="message"></textarea>
 	</div>
+    <div>
+    <input type = "file", name = "upload_image">
+    </div>
 	<input type="submit" name="btn_submit" value="書き込む">
 </form>
 <!-- ここにメッセージの入力フォームを設置 -->
@@ -108,6 +128,16 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 		<time><?php echo date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
 	</div>
 	<p><?php echo $value['message']; ?></p>
+    <!--メッセージを表示しているところ-->
+    <p><?php if(!empty($MSG)) echo $MSG;?></p>
+    
+    <!--画像を表示している箇所-->
+    <p><?php
+        if(!empty($img_path)){?>
+            <img src = "echo<?php $img_path;?>" alt="">
+            <?php
+        }
+        ?>
 </article>
 <?php endforeach; ?>
 <?php endif; ?>
