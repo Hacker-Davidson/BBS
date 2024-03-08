@@ -54,11 +54,11 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>ひと言掲示板</title>
+<title>ひと言掲示板hoge</title>
 
 </head>
 <body>
-<h1>ひと言掲示板</h1>
+<h1>ひと言掲示板hoge</h1>
 <form method="post">
 	<div>
 		<label for="view_name">表示名</label>
@@ -74,6 +74,17 @@ if( $file_handle = fopen( FILENAME,'r') ) {
 <hr>
 <section>
 <!-- ここに投稿されたメッセージを表示 -->
+<?php if( !empty($message_array) ): ?>
+<?php foreach( $message_array as $value ): ?>
+<article>
+	<div class="info">
+		<h2><?php echo $value['view_name']; ?></h2>
+		<time><?php echo date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
+	</div>
+	<p><?php echo $value['message']; ?></p>
+</article>
+<?php endforeach; ?>
+<?php endif; ?>
 </section>
 </body>
 </html>
