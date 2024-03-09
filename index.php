@@ -63,7 +63,6 @@ if ( !empty($_POST['btn_submit']) ){
         }
     }
 
-
 }
 
 if( $file_handle = fopen(FILENAME,'r') ) {
@@ -94,10 +93,9 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     #moveBtn{
         font-size:40px;color:#FFF;background-color:#00CCCC;
         right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:52px;width:52px;z-index:2;}
-    .showImg{
-        width:35%;
-    }
-    .time{font-size:20px;}
+    .showImg{width:35%;}
+    .time{font-size:20px;background:#ffcc00;}
+    .lineHeight{line-height:0.5px;}
 </style>
 </head>
 <body>
@@ -135,10 +133,10 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <table>
         <h2><?php echo $value['view_name']; ?></h2>
         <td>
-            <time class="time"><!--時間-->
-                <?php echo date('m月d日', strtotime($value['post_date'])); ?><br>
-                <?php echo date('H:i', strtotime($value['post_date'])); ?>
-            </time>
+            <!--<time class="time">--><!--時間-->
+                <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
+                <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
+            <!--</time>-->
         </td>
         <td><?php echo $value['message']; ?></td><!--メッセージを表示しているところ-->
         <!--画像を表示している箇所-->
