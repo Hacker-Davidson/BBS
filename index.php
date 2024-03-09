@@ -90,8 +90,14 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <meta charset="utf-8">
 <title>ひと言掲示板</title>
 <style>
-    #box{overflow-y:scroll;height:500px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 2px #000;}
-    #moveBtn{font-size:40px;color:#FFF;background-color:#00CCCC;right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:52px;width:52px;z-index:2;opacity:0.6;}
+    #box{overflow-y:scroll;height:500px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
+    #moveBtn{
+        font-size:40px;color:#FFF;background-color:#00CCCC;
+        right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:52px;width:52px;z-index:2;}
+    .showImg{
+        width:35%;
+    }
+    .time{font-size:20px;}
 </style>
 </head>
 <body>
@@ -126,28 +132,30 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <!-- ここに投稿されたメッセージを表示 -->
     <?php if( !empty($message_array) ): ?>
     <?php foreach( $message_array as $value ): ?>
-    <article>
-        <div class="info">
-            <h2><?php echo $value['view_name']; ?></h2>
-            <time><?php echo date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
-        </div>
-        <p><?php echo $value['message']; ?></p>
-        <!--メッセージを表示しているところ-->
-        <p><?php if(!empty($MSG)) echo $MSG;?>
-        
+    <table>
+        <h2><?php echo $value['view_name']; ?></h2>
+        <td>
+            <time class="time"><!--時間-->
+                <?php echo date('m月d日', strtotime($value['post_date'])); ?><br>
+                <?php echo date('H:i', strtotime($value['post_date'])); ?>
+            </time>
+        </td>
+        <td><?php echo $value['message']; ?></td><!--メッセージを表示しているところ-->
         <!--画像を表示している箇所-->
-        <?php
-            if(!empty($img_path)){;?>
-                <img src = "<?php echo $value['img_data'];?>" alt="">
-                <?php
-            };
-            ?></p>
-    </article>
+        <td>
+            <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
+
+            <?php if(!empty($img_path)){;?>
+                <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+            <?php }; ?>
+        </td>
+        
+    </table>
     <?php endforeach; ?>
     <?php endif; ?>
 </div>
 
-<p id="moveBtn" onclick="moveTop()">▲</p>
+<p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 <script>
     let box=document.getElementById("box");
     let topBtn=class{
