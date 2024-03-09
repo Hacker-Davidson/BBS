@@ -96,6 +96,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <meta charset="utf-8">
 <title>BBS</title>
 <style>
+<<<<<<< HEAD
     #box{overflow-y:scroll;height:500px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
     #moveBtn{
         font-size:40px;color:#FFF;background-color:#00CCCC;
@@ -103,12 +104,31 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     .showImg{width:35%;}
     .time{font-size:20px;background:#ffcc00;}
     .lineHeight{line-height:0.5px;}
+=======
+    #innerBody{margin:auto;position:relative;top:360px;/*background:red;*/}
+    #form-box{height:300px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 4px #000;border-radius:40px;}
+    #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
+    #moveBtn{
+        font-size:75px;color:#FFF;background-color:#00CCCC;
+        right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;}
+    .showImg{width:95%;}
+    .time{font-size:20px;background:#ffcc00;}
+    .lineHeight{line-height:0.5px;}
+    table{border-bottom:solid 2px #000; /*background:red;*/}
+    td{flex-wrap: wrap;}
+    .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
+    .td0{width:15%; font-size:24px; /*background:red;*/} /*time*/
+    .td1{width:65%; /*background:yellow;*/} /*msg*/ .msg{font-size:30px;}
+    .td2{width:20%; text-align:center; /*background:green;*/} /*photo*/
+    .usrName{line-height:1px;}
+>>>>>>> 16a401b (feature:掲示板見た目調整)
 </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
+<<<<<<< HEAD
 <h1>ひと言掲示板</h1>
 <?php if( !empty($success_message) ): ?>
     <p class="success_message"><?php echo $success_message; ?></p>
@@ -162,6 +182,69 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <?php endforeach; ?>
     <?php endif; ?>
 </div>
+=======
+<div id="innerBody">
+    <?php if( !empty($error_message) ): ?>
+        <ul class="error_message">
+            <?php foreach( $error_message as $value ): ?>
+                <li><?php echo $value; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <form method="post", enctype = "multipart/form-data">
+        <table id="form-box">
+            <tr>
+                <td>
+                    <label for="view_name">name</label>
+                    <input id="view_name" type="text" name="view_name" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="message">message</label><br>
+                    <textarea id="message" name="message"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type = "file", name = "upload_image">
+                    <input type="submit" name="btn_submit" value="書き込む">
+                    <?php if( !empty($success_message) ): ?>
+                        <p class="success_message"><?php echo $success_message; ?></p>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <!-- ここにメッセージの入力フォームを設置 -->
+    <div id="box">
+        <!-- ここに投稿されたメッセージを表示 -->
+        <div class="box0">
+            <?php if( !empty($message_array) ): ?>
+            <?php foreach( $message_array as $value ): ?>
+                <table>
+                    <td class="td0"><!--投稿時間-->
+                        <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
+                        <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
+                    </td>
+
+                    <td class="td1"><!--メッセージを表示しているところ-->
+                        <h1 class="usrName"><?php echo $value['view_name']; ?></h1>
+                        <p class="msg"><?php echo $value['message']; ?></p>
+                    </td>
+
+                    <td class="td2"><!--画像を表示している箇所-->
+                        <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
+                        <?php if(!empty($img_path)){;?>
+                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                        <?php }; ?>
+                    </td>
+                </table>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+>>>>>>> 16a401b (feature:掲示板見た目調整)
 
     <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 </div>
