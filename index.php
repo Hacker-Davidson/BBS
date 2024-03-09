@@ -106,6 +106,9 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     .td2{width:20%; text-align:center; /*background:green;*/} /*photo*/
     .usrName{line-height:1px;}
 </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="innerBody">
@@ -161,7 +164,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                     <td class="td2"><!--画像を表示している箇所-->
                         <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
                         <?php if(!empty($img_path)){;?>
-                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                            <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
                         <?php }; ?>
                     </td>
                 </table>
