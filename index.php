@@ -89,12 +89,12 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <meta charset="utf-8">
 <title>BBS</title>
 <style>
-    body, header{margin:auto;}
+    body{margin:auto;background:#dcbc55;}
     .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}
-    header{background:red;width:100%;}
-    #header{font-size:50px;text-align:center;padding-top:70px;color:#FFF;}
+    header{background:#376169;width:100%;margin:auto;}
+    #header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}
     #innerBody{margin:auto;position:relative;top:375px;/*background:red;*/}
-    #form-box{height:455px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;}
+    #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;}
     .form-box0{width:92%;margin:auto;}
     .title{font-size:30px;font-weight:bolder;right:0;left:0;}
     input, textarea{border:2px solid #000;box-sizing:border-box;}
@@ -128,13 +128,6 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     </div>
 </header>
 <div id="innerBody">
-    <?php if( !empty($error_message) ): ?>
-        <ul class="error_message">
-            <?php foreach( $error_message as $value ): ?>
-                <li><?php echo $value; ?></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
     <form method="post", enctype = "multipart/form-data">
         <div id="form-box">
             <p class="form-box0"><br>
@@ -158,6 +151,11 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                         </span>
                     </p>
                 </div>
+                <?php if( !empty($error_message) ): ?>
+                    <ul class="error_message">
+                        <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
                 <?php if( !empty($success_message) ): ?>
                     <span class="success_message"><?php echo $success_message; ?></span>
                 <?php endif; ?>
@@ -177,8 +175,8 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                     </td>
 
                     <td class="td1"><!--メッセージを表示しているところ-->
-                        <h1 class="usrName"><?php echo $value['view_name']; ?></h1>
-                        <p class="msg"><?php echo $value['message']; ?></p>
+                        <h1 class="usrName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h1>
+                        <p class="msg" style="line-break:anywhere;"><?php echo $value['message']; ?></p>
                     </td>
 
                     <td class="td2"><!--画像を表示している箇所-->
