@@ -202,7 +202,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
         this.defaultc=defaultc;
     }
     }
-    let topInstance=new topBtn(0,"background:blue;","background:#00CCCC;");
+    let topInstance=new topBtn(0,"background:blue;","background:#00BFFF;");
     let moveBtn=document.getElementById("moveBtn");
     let moveTop=function(n=true){
     moveBtn.style=topInstance.blue;
