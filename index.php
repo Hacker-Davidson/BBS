@@ -89,13 +89,20 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <meta charset="utf-8">
 <title>ひと言掲示板</title>
 <style>
-    #box{overflow-y:scroll;height:500px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
+    #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
     #moveBtn{
         font-size:40px;color:#FFF;background-color:#00CCCC;
         right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:52px;width:52px;z-index:2;}
-    .showImg{width:35%;}
+    .showImg{width:95%;}
     .time{font-size:20px;background:#ffcc00;}
     .lineHeight{line-height:0.5px;}
+    table{border-bottom:solid 2px #000; /*background:red;*/}
+    td{flex-wrap: wrap;}
+    .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
+    .td0{width:15%; /*background:red;*/} /*time*/
+    .td1{width:65%; /*background:yellow;*/} /*msg*/
+    .td2{width:20%; text-align:center; /*background:green;*/} /*photo*/
+    .usrName{line-height:1px;}
 </style>
 </head>
 <body>
@@ -128,29 +135,30 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <hr>
 <div id="box">
     <!-- ここに投稿されたメッセージを表示 -->
-    <?php if( !empty($message_array) ): ?>
-    <?php foreach( $message_array as $value ): ?>
-    <table>
-        <h2><?php echo $value['view_name']; ?></h2>
-        <td>
-            <!--<time class="time">--><!--時間-->
-                <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
-                <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
-            <!--</time>-->
-        </td>
-        <td><?php echo $value['message']; ?></td><!--メッセージを表示しているところ-->
-        <!--画像を表示している箇所-->
-        <td>
-            <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
-
-            <?php if(!empty($img_path)){;?>
-                <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
-            <?php }; ?>
-        </td>
-        
-    </table>
-    <?php endforeach; ?>
-    <?php endif; ?>
+    <div class="box0">
+        <?php if( !empty($message_array) ): ?>
+        <?php foreach( $message_array as $value ): ?>
+            <table>
+                <!--<h2><?php echo $value['view_name']; ?></h2>-->
+                <td class="td0">
+                    <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
+                    <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
+                </td>
+                <td class="td1">
+                    <h2 class="usrName"><?php echo $value['view_name']; ?></h2>
+                    <?php echo $value['message']; ?>
+                </td><!--メッセージを表示しているところ-->
+                <!--画像を表示している箇所-->
+                <td class="td2">
+                    <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
+                        <?php if(!empty($img_path)){;?>
+                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                        <?php }; ?>
+                </td>
+            </table>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 </div>
 
 <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
