@@ -90,10 +90,11 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <title>BBS</title>
 <style>
     #innerBody{margin:auto;position:relative;top:360px;/*background:red;*/}
-    #form-box{height:320px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 3px #000;border-radius:40px;}
-    .form-box0{background:red; width:80%;margin:auto;}
+    #form-box{height:350px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 3px #000;border-radius:40px;}
+    .form-box0{width:92%;margin:auto;}
     .title{font-size:26px;font-weight:bolder;right:0;left:0;}
-    input, textarea{border:2px solid #000;}
+    input, textarea{border:2px solid #000; box-sizing:border-box;}
+    #message{height:8em;font-size:10px;}
     #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
     #moveBtn{
         font-size:75px;color:#FFF;background-color:#00CCCC;
@@ -124,19 +125,19 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <?php endif; ?>
     <form method="post", enctype = "multipart/form-data">
         <div id="form-box">
-            <p class="form-box0">
+            <p class="form-box0"><br>
                 <label class="title" for="view_name">name</label>
-                <input id="view_name" type="text" name="view_name" value="">
+                <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
             </p>
             <p class="form-box0">
                 <label class="title" for="message">message</label><br>
-                <textarea id="message" rows="8" name="message" style="width:100%;"></textarea>
+                <textarea id="message" name="message" style="width:100%;"></textarea>
             </p>
             <p class="form-box0">
-                <input type = "file", name = "upload_image">
-                <input type="submit" name="btn_submit" value="書き込む">
+                <input type="file" name="upload_image" style="font-size:20px; border-radius:50px;">
+                <input type="submit" name="btn_submit" style="font-size:20px; border-radius:50px;" value="書き込む"><br>
                 <?php if( !empty($success_message) ): ?>
-                    <p class="success_message"><?php echo $success_message; ?></p>
+                    <span class="success_message"><?php echo $success_message; ?></span>
                 <?php endif; ?>
             </p>
         </div>
