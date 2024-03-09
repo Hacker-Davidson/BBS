@@ -89,20 +89,27 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <meta charset="utf-8">
 <title>BBS</title>
 <style>
-    #innerBody{margin:auto;position:relative;top:360px;/*background:red;*/}
-    #form-box{height:350px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 3px #000;border-radius:40px;}
+    body, header{margin:auto;}
+    .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}
+    header{background:red;width:100%;}
+    #header{font-size:50px;text-align:center;padding-top:70px;color:#FFF;}
+    #innerBody{margin:auto;position:relative;top:375px;/*background:red;*/}
+    #form-box{height:455px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;}
     .form-box0{width:92%;margin:auto;}
-    .title{font-size:26px;font-weight:bolder;right:0;left:0;}
-    input, textarea{border:2px solid #000; box-sizing:border-box;}
-    #message{height:8em;font-size:10px;}
+    .title{font-size:30px;font-weight:bolder;right:0;left:0;}
+    input, textarea{border:2px solid #000;box-sizing:border-box;}
+    .centre{text-align:center;}
+    #message{height:20em;font-size:10px;}
     #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
     #moveBtn{
         font-size:75px;color:#FFF;background-color:#00CCCC;
         right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;}
+    #inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}
+    #inputBtn1{color:#FFF;font-weight:bold;font-size:26px;background:#FF3300;border-radius:20px;padding:6px;}
     .showImg{width:95%;}
     .time{font-size:20px;background:#ffcc00;}
     .lineHeight{line-height:0.5px;}
-    table{border-bottom:solid 2px #000; /*background:red;*/}
+    table{border-bottom:solid 2px #000;width:100%;}
     td{flex-wrap: wrap;}
     .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
     .td0{width:15%; font-size:24px;} /*time*/
@@ -115,6 +122,11 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
+<header>
+    <div id="header">
+    𝗛𝗮𝗶𝗤𝘂𝗿𝗶
+    </div>
+</header>
 <div id="innerBody">
     <?php if( !empty($error_message) ): ?>
         <ul class="error_message">
@@ -134,8 +146,18 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                 <textarea id="message" name="message" style="width:100%;"></textarea>
             </p>
             <p class="form-box0">
-                <input type="file" name="upload_image" style="font-size:20px; border-radius:50px;">
-                <input type="submit" name="btn_submit" style="font-size:20px; border-radius:50px;" value="書き込む"><br>
+                <div class="display-flex">
+                    <p class="centre">
+                        <span id="inputBtn0" style="padding:6px 25px;">
+                            <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
+                        </span>
+                    </p>
+                    <p class="centre" style="margin-left:auto;">
+                        <span id="inputBtn1" style="padding:6px 45px;">
+                            <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
+                        </span>
+                    </p>
+                </div>
                 <?php if( !empty($success_message) ): ?>
                     <span class="success_message"><?php echo $success_message; ?></span>
                 <?php endif; ?>
