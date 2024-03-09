@@ -90,8 +90,9 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <title>BBS</title>
 <style>
     #innerBody{margin:auto;position:relative;top:360px;/*background:red;*/}
-    #form-box{height:300px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 3px #000;border-radius:40px;}
-    #form-box0{background:red;}
+    #form-box{height:320px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:30px;position:relative;border:solid 3px #000;border-radius:40px;}
+    .form-box0{background:red; width:80%;margin:auto;}
+    .title{font-size:26px;font-weight:bolder;right:0;left:0;}
     input, textarea{border:2px solid #000;}
     #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
     #moveBtn{
@@ -122,31 +123,23 @@ if( $file_handle = fopen(FILENAME,'r') ) {
         </ul>
     <?php endif; ?>
     <form method="post", enctype = "multipart/form-data">
-        <table id="form-box">
-            <tbody id="form-box0">
-                <tr>
-                    <td>
-                        <label for="view_name">name</label>
-                        <input id="view_name" type="text" name="view_name" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="message">message</label><br>
-                        <textarea id="message" name="message" style="width:100%;"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type = "file", name = "upload_image">
-                        <input type="submit" name="btn_submit" value="書き込む">
-                        <?php if( !empty($success_message) ): ?>
-                            <p class="success_message"><?php echo $success_message; ?></p>
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="form-box">
+            <p class="form-box0">
+                <label class="title" for="view_name">name</label>
+                <input id="view_name" type="text" name="view_name" value="">
+            </p>
+            <p class="form-box0">
+                <label class="title" for="message">message</label><br>
+                <textarea id="message" rows="8" name="message" style="width:100%;"></textarea>
+            </p>
+            <p class="form-box0">
+                <input type = "file", name = "upload_image">
+                <input type="submit" name="btn_submit" value="書き込む">
+                <?php if( !empty($success_message) ): ?>
+                    <p class="success_message"><?php echo $success_message; ?></p>
+                <?php endif; ?>
+            </p>
+        </div>
     </form>
     <!-- ここにメッセージの入力フォームを設置 -->
     <div id="box">
