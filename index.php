@@ -17,6 +17,8 @@ $message_array = array();
 $success_message = null;
 $error_message = array();
 
+session_start();
+
 if(!empty($_FILES)){
     #$_FILESからファイル名取得
     $filename = $_FILES['upload_image']['name'];
@@ -59,9 +61,13 @@ if ( !empty($_POST['btn_submit']) ){
             //ファイルを閉じる
             fclose($file_handle);
 
-            $success_message = 'メッセージを書き込みました。';
+       
         }
-    }
+
+        $_SESSION['success_message'] = 'メッセージを書き込みました。';
+        header('Location: ./');
+		exit();
+        }
 
 }
 
@@ -83,6 +89,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -156,9 +163,16 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                         <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
-                <?php if( !empty($success_message) ): ?>
-                    <span class="success_message"><?php echo $success_message; ?></span>
+                <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
+                    <span class="success_message">
+                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
+                    <?php unset($_SESSION['success_message']); ?>
                 <?php endif; ?>
+                <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
+                    <span class="success_message">
+                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+                    </span>
+                <?php endif; ?>-->
             </p>
         </div>
     </form>
@@ -180,8 +194,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                     </td>
 
                     <td class="td2"><!--画像を表示している箇所-->
-                        <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
-                        <?php if(!empty($img_path)){;?>
+                        <?php if(!empty ($value['img_data'])){;?>
                             <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
                         <?php }; ?>
                     </td>
