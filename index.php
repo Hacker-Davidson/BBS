@@ -236,7 +236,7 @@ if( $file_handle = fopen(FILENAME,'r') ) {
                     <td class="td2"><!--画像を表示している箇所-->
                         <!--<?php if(!empty($MSG)) echo $MSG;?>--><!--画像のファイル名, 後で削除-->
                         <?php if(!empty($img_path)){;?>
-                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                            <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
                         <?php }; ?>
                     </td>
                 </table>
