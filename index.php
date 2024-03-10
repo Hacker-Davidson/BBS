@@ -114,15 +114,16 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .showImg{width:95%;}
 .lineHeight{line-height:0.5px;}
-#postsTable{border-bottom:solid 2px #000;width:100%;background:#ffcc00;}
+#postsTable{border-radius:30px;width:90%;margin:auto;background:#ffcc00;}
 
-.box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
-td{flex-wrap:wrap;background:limegreen;}
+/*.box0{width:95%; position:relative; right:0; left:0; margin:auto;}*/
+td{flex-wrap:wrap;background:transparent;}
 
-    .td0{width:15%; font-size:24px;} /*time*/
-    .td1{width:65%;} /*msg*/ .msg{font-size:30px;}
-    .td2{width:20%; text-align:center;} /*photo*/
-    .placeName{line-height:1px;}
+.photo{width:20%; text-align:center;}
+.comment{width:65%;} .msg{font-size:30px;line-break:anywhere;}
+.time{font-size:15px;} /*time*/
+
+.placeName{line-height:1px;}
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -178,21 +179,23 @@ td{flex-wrap:wrap;background:limegreen;}
         <?php if( !empty($message_array) ): ?>
         <?php foreach( $message_array as $value ): ?>
             <table id="postsTable">
-                <td class="td0"><!--投稿時間-->
-                    <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
-                    <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
-                </td>
 
-                <td class="td1"><!--メッセージを表示しているところ-->
-                    <h1 class="placeName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h1>
-                    <p class="msg" style="line-break:anywhere;"><?php echo $value['message']; ?></p>
-                </td>
-
-                <td class="td2"><!--画像を表示している箇所-->
+                <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
                         <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
                     <?php }; ?>
                 </td>
+                <td class="comment"><!--メッセージを表示しているところ-->
+                    <h3 class="placeName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h3>
+                    <p class="msg"><?php echo $value['message']; ?></p>
+
+                    <p class="time"><!--投稿時間-->
+                        <span><?php echo date('m月d日', strtotime($value['post_date'])); ?></span>
+                        <span class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></span>
+                    </p>
+
+                </td>
+
             </table>
         <?php endforeach; ?>
         <?php endif; ?>
