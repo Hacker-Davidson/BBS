@@ -93,7 +93,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
 
-#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;right:0;left:0;margin:auto;bottom:0;position:relative;border:solid 4px #000;/*background:red;*/}
+#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;
     right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
@@ -101,7 +101,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .showImg{width:95%;}
 .lineHeight{line-height:0.5px;}
-#postsTable{border-radius:30px;width:90%;margin:auto;background:#ffcc00;}
+#postsTable{border-radius:30px;width:90%;margin:auto;box-shadow:10px 5px 5px #888;/*background:#ffcc00;*/}
 
 /*.box0{width:95%; position:relative; right:0; left:0; margin:auto;}*/
 td{flex-wrap:wrap;background:transparent;}
