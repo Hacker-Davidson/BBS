@@ -63,11 +63,12 @@ if( $file_handle = fopen(FILENAME,'r') ) {
         $split_data = preg_split( '/\'/', $data);
 
         $message = array(
-            'view_name' => $split_data[1],
+            'view_name' => '@'.$split_data[1],
             'message' => $split_data[3],
             'post_date' => $split_data[5],
             'img_data' => $split_data[7]
         );
+        $message['view_name'];
         array_unshift( $message_array, $message);
     }
     fclose( $file_handle);//ファイルを閉じる
