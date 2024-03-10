@@ -116,7 +116,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 .time{font-size:20px;background:#ffcc00;}
 .lineHeight{line-height:0.5px;}
 #postsTable{border-bottom:solid 2px #000;width:100%;background:#ffcc00;}
-    td{flex-wrap:wrap;background}
+    td{flex-wrap:wrap;background:green;}
     .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
     .td0{width:15%; font-size:24px;} /*time*/
     .td1{width:65%;} /*msg*/ .msg{font-size:30px;}
