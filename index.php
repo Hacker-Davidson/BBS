@@ -80,9 +80,21 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <head><meta charset="utf-8"><title>BBS</title>
 <style>
 body{margin:auto;background:#FFF;position:relative;}
+.space0{
+    height:10vh;
+}
+.space1{
+    height:1vh;
+}
 header{background:#376169;width:100%;margin:auto;}
 #header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}.centre{text-align:center;}
-
+#openMenu{
+    height:calc(tan(70deg)*30px/2);
+    width:100px;
+    clip-path:polygon(5% 10%, 94% 10%,48% 100%);
+    background:#CCC;
+    margin:auto;
+}
 /*================================ここからフォームのCSS==========================================*/
 #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;/*background:red;*/}
 .form-box0{width:92%;margin:auto;}
@@ -101,6 +113,11 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 }
 
 .showImg{width:95%;}
+    font-size:75px;color:#FFF;background-color:#00CCCC;opacity:0.7;
+    left:35%;bottom:120px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+}
+
+.showImg{width:100%;}
 .lineHeight{line-height:0.5px;}
 #postsTable{border-radius:30px;width:90%;margin:auto;box-shadow:10px 5px 5px #888;/*background:#ffcc00;*/}
 
@@ -118,49 +135,59 @@ td{flex-wrap:wrap;background:transparent;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
-<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>
+
+<!--<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>-->
 
 <div id="box">
-    <form method="post", enctype = "multipart/form-data">
-        <div id="form-box">
-            <p class="form-box0">
-                <textarea id="messageArea" name="message" style="width:100%;"></textarea>
-            </p>
-            <p class="form-box0"><br>
-                <label for="view_name">場所</label>
-                <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
-            </p>
-            <p class="form-box0">
-                <div class="display-flex">
-                    <p class="centre">
-                        <span id="inputBtn0" style="padding:6px 25px;">
-                            <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
-                        </span>
+        <div id="m2">
+            <form method="post", enctype = "multipart/form-data">
+                <p class="space0"></p>
+                <div id="form-box">
+                    <p class="space1"></p>
+                    <p class="form-box0">
+                        <textarea id="messageArea" name="message" style="width:100%;"></textarea>
                     </p>
-                    <p class="centre" style="margin-left:auto;">
-                        <span id="inputBtn1" style="padding:6px 45px;">
-                            <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
-                        </span>
+                    <p class="form-box0"><br>
+                        <label for="view_name">場所</label>
+                        <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
+                    </p>
+                    <p class="form-box0">
+                        <div class="display-flex">
+                            <p class="centre">
+                                <span id="inputBtn0" style="padding:6px 25px;">
+                                    <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
+                                </span>
+                            </p>
+                            <p class="centre" style="margin-left:auto;">
+                                <span id="inputBtn1" style="padding:6px 45px;">
+                                    <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
+                                </span>
+                            </p>
+                        </div>
+                        <?php if( !empty($error_message) ): ?>
+                            <ul class="error_message">
+                                <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                        <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
+                            <span class="success_message">
+                                <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
+                            <?php unset($_SESSION['success_message']); ?>
+                        <?php endif; ?>
+                        <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
+                            <span class="success_message">
+                                <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+                            </span>
+                        <?php endif; ?>-->
                     </p>
                 </div>
-                <?php if( !empty($error_message) ): ?>
-                    <ul class="error_message">
-                        <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-                <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php unset($_SESSION['success_message']); ?>
-                <?php endif; ?>
-                <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
-                    </span>
-                <?php endif; ?>-->
-            </p>
+            </form>
         </div>
-    </form>
+
+        <div class="menu1" onclick="m0()">
+            <div id="openMenu"></div>
+        </div><br>
+
     <!-- ここまでメッセージの入力フォーム -->
 
 
@@ -171,7 +198,11 @@ td{flex-wrap:wrap;background:transparent;}
             <table id="postsTable">
                 <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
-                        <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+
+                        <a href="<?php echo $value['img_data'];?>" data-lightbox="group">
+                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                        </a>
+
                     <?php }; ?>
                 </td>
                 <td class="comment"><!--メッセージを表示しているところ-->
@@ -193,12 +224,18 @@ td{flex-wrap:wrap;background:transparent;}
 
 
 <script>
+    document.getElementById("m2").style.display="none";
+    function m0(){
+        let m1=document.getElementById("m2");
+        if(m1.style.display=="block"){m1.style.display="none";} else{m1.style.display="block";}
+    }
+
     let box=document.getElementById("box");
     let topBtn=class{
         constructor(y,blue,defaultc){
-            this.y=y;
-            this.blue=blue;
-            this.defaultc=defaultc;
+
+            this.y=y; this.blue=blue; this.defaultc=defaultc;
+
         }
     }
     let topInstance=new topBtn(0,"background:blue;","background:#00BFFF;");
@@ -208,16 +245,16 @@ td{flex-wrap:wrap;background:transparent;}
     if(n==true && box.scrollTop>topInstance.y){
         let cnt=0;
         function cntUp(){
-        cnt++;
-        let time=setTimeout(cntUp,100);
-        console.log(cnt);
+
+            cnt++;
+            let time=setTimeout(cntUp,100);
+            console.log(cnt);
             if(cnt==2){
-                clearTimeout(time);
-                console.log("quit");
+                clearTimeout(time); console.log("quit");
                 moveBtn.style=topInstance.defaultc;
             }
-        }
-        cntUp();
+        } cntUp();
+
     }
     else{moveBtn.style=topInstance.defaultc;}
     box.scrollTop=topInstance.y; //0
