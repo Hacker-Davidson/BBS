@@ -1,7 +1,7 @@
 <?php
 
 //メッセージを保存するファイルのパス設定
-define('FILENAME','./message.txt');
+define('FILENAME','./bbsmessage.txt');
 define('IMAGEPLACE', './images_after');
 
 //タイムゾーン設定
@@ -191,7 +191,7 @@ td{flex-wrap:wrap;background:transparent;}
                 <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
                         <a href="<?php echo $value['img_data'];?>" data-lightbox="group">
-                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                            <img class="showImg" src="<?php echo $value['img_data'];?>" alt="">
                         </a>
                     <?php }; ?>
                 </td>
