@@ -95,11 +95,11 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 #box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
 #moveBtn{
-    font-size:75px;color:#FFF;background-color:#00CCCC;
-    right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+    font-size:75px;color:#FFF;background-color:#00CCCC;opacity:0.7;
+    left:35%;bottom:120px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
 
-.showImg{width:95%;}
+.showImg{width:100%;}
 .lineHeight{line-height:0.5px;}
 #postsTable{border-radius:30px;width:90%;margin:auto;box-shadow:10px 5px 5px #888;/*background:#ffcc00;*/}
 
@@ -120,46 +120,52 @@ td{flex-wrap:wrap;background:transparent;}
 <header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>
 
 <div id="box">
-    <form method="post", enctype = "multipart/form-data">
-        <div id="form-box">
-            <p class="form-box0">
-                <textarea id="messageArea" name="message" style="width:100%;"></textarea>
-            </p>
-            <p class="form-box0"><br>
-                <label for="view_name">場所</label>
-                <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
-            </p>
-            <p class="form-box0">
-                <div class="display-flex">
-                    <p class="centre">
-                        <span id="inputBtn0" style="padding:6px 25px;">
-                            <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
-                        </span>
+
+    <div>
+    <div class="menu1" onclick="m0()">ABOT</div><br>
+        <div id="m2">
+            <form method="post", enctype = "multipart/form-data">
+                <div id="form-box">
+                    <p class="form-box0">
+                        <textarea id="messageArea" name="message" style="width:100%;"></textarea>
                     </p>
-                    <p class="centre" style="margin-left:auto;">
-                        <span id="inputBtn1" style="padding:6px 45px;">
-                            <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
-                        </span>
+                    <p class="form-box0"><br>
+                        <label for="view_name">場所</label>
+                        <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
+                    </p>
+                    <p class="form-box0">
+                        <div class="display-flex">
+                            <p class="centre">
+                                <span id="inputBtn0" style="padding:6px 25px;">
+                                    <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
+                                </span>
+                            </p>
+                            <p class="centre" style="margin-left:auto;">
+                                <span id="inputBtn1" style="padding:6px 45px;">
+                                    <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
+                                </span>
+                            </p>
+                        </div>
+                        <?php if( !empty($error_message) ): ?>
+                            <ul class="error_message">
+                                <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                        <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
+                            <span class="success_message">
+                                <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
+                            <?php unset($_SESSION['success_message']); ?>
+                        <?php endif; ?>
+                        <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
+                            <span class="success_message">
+                                <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+                            </span>
+                        <?php endif; ?>-->
                     </p>
                 </div>
-                <?php if( !empty($error_message) ): ?>
-                    <ul class="error_message">
-                        <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-                <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php unset($_SESSION['success_message']); ?>
-                <?php endif; ?>
-                <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
-                    </span>
-                <?php endif; ?>-->
-            </p>
+            </form>
         </div>
-    </form>
+    </div>
     <!-- ここまでメッセージの入力フォーム -->
 
 
@@ -170,7 +176,9 @@ td{flex-wrap:wrap;background:transparent;}
             <table id="postsTable">
                 <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
-                        <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                        <a href="<?php echo $value['img_data'];?>" data-lightbox="group">
+                            <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                        </a>
                     <?php }; ?>
                 </td>
                 <td class="comment"><!--メッセージを表示しているところ-->
@@ -192,6 +200,12 @@ td{flex-wrap:wrap;background:transparent;}
 
 
 <script>
+    document.getElementById("m2").style.display="none";
+    function m0(){
+        let m1=document.getElementById("m2");
+        if(m1.style.display=="block"){m1.style.display="none";} else{m1.style.display="block";}
+    }
+
     let box=document.getElementById("box");
     let topBtn=class{
         constructor(y,blue,defaultc){
@@ -207,9 +221,9 @@ td{flex-wrap:wrap;background:transparent;}
     if(n==true && box.scrollTop>topInstance.y){
         let cnt=0;
         function cntUp(){
-        cnt++;
-        let time=setTimeout(cntUp,100);
-        console.log(cnt);
+            cnt++;
+            let time=setTimeout(cntUp,100);
+            console.log(cnt);
             if(cnt==2){
                 clearTimeout(time);
                 console.log("quit");
