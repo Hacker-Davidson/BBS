@@ -106,6 +106,7 @@ td{flex-wrap:wrap;background:transparent;}
 .placeName{line-height:1px;}
 footer{width:100%;margin:auto;/*background:red;*/}
 #footer{font-size:50px;text-align:center;padding-top:90px;color:#FFF;}
+select{text-align:center;width:150px; font-size:22px; color:#000033;border-radius:20px;}
 </style>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -125,7 +126,10 @@ footer{width:100%;margin:auto;/*background:red;*/}
                     </p>
                     <p class="form-box0"><br>
                         <label for="view_name">場所</label>
-                        <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
+                        <!--<input id="view_name" type="text" name="view_name" value="" style="width:50%;">-->
+
+                        <select size="1" name="view_name" id="places"></select>
+
                     </p>
                     <p class="form-box0">
                         <div class="display-flex">
@@ -188,6 +192,21 @@ footer{width:100%;margin:auto;/*background:red;*/}
 </footer>
 
 <script>
+    let hoge="江ノ島";
+    document.getElementById("places").innerHTML=
+            '<option value="" selected>場所を選択</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>'+
+            '<option value="'+hoge+'">'+hoge+'</option>';
+    /*htmlサイドで　if 入力欄==true{選択をdisplay:noneに}*/
+
+
     document.getElementById("m2").style.display="none";
     function m0(){
         let m1=document.getElementById("m2");
