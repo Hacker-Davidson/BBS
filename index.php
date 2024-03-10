@@ -90,34 +90,33 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>BBS</title>
+<!DOCTYPE html><html lang="ja">
+<head><meta charset="utf-8"><title>BBS</title>
 <style>
-    body{margin:auto;background:#dcbc55;}
-    .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}
-    header{background:#376169;width:100%;margin:auto;}
-    #header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}
-    #innerBody{margin:auto;position:relative;top:375px;/*background:red;*/}
-    #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;}
-    .form-box0{width:92%;margin:auto;}
-    .title{font-size:30px;font-weight:bolder;right:0;left:0;}
-    input, textarea{border:2px solid #000;box-sizing:border-box;}
-    .centre{text-align:center;}
-    #message{height:20em;font-size:10px;}
-    #box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;}
-    #moveBtn{
-        font-size:75px;color:#FFF;background-color:#00CCCC;
-        right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;}
-    #inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}
-    #inputBtn1{color:#FFF;font-weight:bold;font-size:26px;background:#FF3300;border-radius:20px;padding:6px;}
-    .showImg{width:95%;}
-    .time{font-size:20px;background:#ffcc00;}
-    .lineHeight{line-height:0.5px;}
-    table{border-bottom:solid 2px #000;width:100%;}
-    td{flex-wrap: wrap;}
+body{margin:auto;background:#FFF;}header{background:#376169;width:100%;margin:auto;}#header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}.centre{text-align:center;}
+
+/*================================ここからフォームのCSS==========================================*/
+#form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;/*background:red;*/}
+.form-box0{width:92%;margin:auto;}
+input, textarea{border:2px solid #000;box-sizing:border-box;}
+#messageArea{height:20em;font-size:10px;/*background:skyblue;*/}
+#inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}/*画像を選択のボタン*/
+#inputBtn1{color:#FFF;font-weight:bold;font-size:26px;background:#FF3300;border-radius:20px;padding:6px;}/*送信ボタン*/
+/*================================ここまでフォームのCSS==========================================*/
+
+.display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
+
+#box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;background:red;}
+#moveBtn{
+    font-size:75px;color:#FFF;background-color:#00CCCC;
+    right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+}
+
+.showImg{width:95%;}
+.time{font-size:20px;background:#ffcc00;}
+.lineHeight{line-height:0.5px;}
+#postsTable{border-bottom:solid 2px #000;width:100%;background:#ffcc00;}
+    td{flex-wrap:wrap;background}
     .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
     .td0{width:15%; font-size:24px;} /*time*/
     .td1{width:65%;} /*msg*/ .msg{font-size:30px;}
@@ -129,60 +128,54 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
-<header>
-    <div id="header">
-    𝗛𝗮𝗶𝗤𝘂𝗿𝗶
-    </div>
-</header>
-<div id="innerBody">
-    <form method="post", enctype = "multipart/form-data">
-        <div id="form-box">
-            <p class="form-box0"><br>
-                <label class="title" for="view_name">name</label>
-                <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
-            </p>
-            <p class="form-box0">
-                <label class="title" for="message">message</label><br>
-                <textarea id="message" name="message" style="width:100%;"></textarea>
-            </p>
-            <p class="form-box0">
-                <div class="display-flex">
-                    <p class="centre">
-                        <span id="inputBtn0" style="padding:6px 25px;">
-                            <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
-                        </span>
-                    </p>
-                    <p class="centre" style="margin-left:auto;">
-                        <span id="inputBtn1" style="padding:6px 45px;">
-                            <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
-                        </span>
-                    </p>
-                </div>
-                <?php if( !empty($error_message) ): ?>
-                    <ul class="error_message">
-                        <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-                <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
-                    <?php unset($_SESSION['success_message']); ?>
-                <?php endif; ?>
-                <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
-                    <span class="success_message">
-                        <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header><!--ヘッダー,書き換えなくていい-->
+<form method="post", enctype = "multipart/form-data">
+    <div id="form-box">
+        <p class="form-box0">
+            <textarea id="messageArea" name="message" style="width:100%;"></textarea>
+        </p>
+        <p class="form-box0"><br>
+            <label for="view_name">場所</label>
+            <input id="view_name" type="text" name="view_name" value="" style="width:50%;">
+        </p>
+        <p class="form-box0">
+            <div class="display-flex">
+                <p class="centre">
+                    <span id="inputBtn0" style="padding:6px 25px;">
+                        <label><input type="file" name="upload_image" style="display:none;">画像をアップロード</label>
                     </span>
-                <?php endif; ?>-->
-            </p>
-        </div>
-    </form>
+                </p>
+                <p class="centre" style="margin-left:auto;">
+                    <span id="inputBtn1" style="padding:6px 45px;">
+                        <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
+                    </span>
+                </p>
+            </div>
+            <?php if( !empty($error_message) ): ?>
+                <ul class="error_message">
+                    <?php foreach( $error_message as $value ): ?><li><?php echo $value; ?></li><?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+            <?php if( empty($_POST['btn_submit']) && !empty($_SESSION['success_message']) ): ?>
+                <span class="success_message">
+                    <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?></span>
+                <?php unset($_SESSION['success_message']); ?>
+            <?php endif; ?>
+            <!--<?php if( !empty($success_message) && !empty($_SESSION['success_message']) ): ?>
+                <span class="success_message">
+                    <?php echo htmlspecialchars( $_SESSION['success_message'], ENT_QUOTES, 'UTF-8'); ?>
+                </span>
+            <?php endif; ?>-->
+        </p>
+    </div>
+</form>
     <!-- ここにメッセージの入力フォームを設置 -->
     <div id="box">
         <!-- ここに投稿されたメッセージを表示 -->
         <div class="box0">
             <?php if( !empty($message_array) ): ?>
             <?php foreach( $message_array as $value ): ?>
-                <table>
+                <table id="postsTable">
                     <td class="td0"><!--投稿時間-->
                         <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
                         <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
@@ -205,7 +198,8 @@ if( $file_handle = fopen(FILENAME,'r') ) {
     </div>
 
     <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
-</div>
+
+
 <script>
     let box=document.getElementById("box");
     let topBtn=class{
