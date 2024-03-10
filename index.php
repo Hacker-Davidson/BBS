@@ -63,11 +63,12 @@ if( $file_handle = fopen(FILENAME,'r') ) {
         $split_data = preg_split( '/\'/', $data);
 
         $message = array(
-            'view_name' => $split_data[1],
+            'view_name' => '@'.$split_data[1],
             'message' => $split_data[3],
             'post_date' => $split_data[5],
             'img_data' => $split_data[7]
         );
+        $message['view_name'];
         array_unshift( $message_array, $message);
     }
     fclose( $file_handle);//ファイルを閉じる
@@ -107,6 +108,11 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 #box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
 #moveBtn{
+    font-size:75px;color:#FFF;background-color:#00CCCC;
+    right:0;left:35%;bottom:150px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+}
+
+.showImg{width:95%;}
     font-size:75px;color:#FFF;background-color:#00CCCC;opacity:0.7;
     left:35%;bottom:120px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
@@ -129,6 +135,7 @@ td{flex-wrap:wrap;background:transparent;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
+
 <!--<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>-->
 
 <div id="box">
@@ -180,6 +187,7 @@ td{flex-wrap:wrap;background:transparent;}
         <div class="menu1" onclick="m0()">
             <div id="openMenu"></div>
         </div><br>
+
     <!-- ここまでメッセージの入力フォーム -->
 
 
@@ -190,9 +198,11 @@ td{flex-wrap:wrap;background:transparent;}
             <table id="postsTable">
                 <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
+
                         <a href="<?php echo $value['img_data'];?>" data-lightbox="group">
                             <img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
                         </a>
+
                     <?php }; ?>
                 </td>
                 <td class="comment"><!--メッセージを表示しているところ-->
@@ -212,6 +222,7 @@ td{flex-wrap:wrap;background:transparent;}
 
 <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 
+
 <script>
     document.getElementById("m2").style.display="none";
     function m0(){
@@ -222,7 +233,9 @@ td{flex-wrap:wrap;background:transparent;}
     let box=document.getElementById("box");
     let topBtn=class{
         constructor(y,blue,defaultc){
+
             this.y=y; this.blue=blue; this.defaultc=defaultc;
+
         }
     }
     let topInstance=new topBtn(0,"background:blue;","background:#00BFFF;");
@@ -232,6 +245,7 @@ td{flex-wrap:wrap;background:transparent;}
     if(n==true && box.scrollTop>topInstance.y){
         let cnt=0;
         function cntUp(){
+
             cnt++;
             let time=setTimeout(cntUp,100);
             console.log(cnt);
@@ -240,6 +254,7 @@ td{flex-wrap:wrap;background:transparent;}
                 moveBtn.style=topInstance.defaultc;
             }
         } cntUp();
+
     }
     else{moveBtn.style=topInstance.defaultc;}
     box.scrollTop=topInstance.y; //0
