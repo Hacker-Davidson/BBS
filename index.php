@@ -78,7 +78,9 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <!DOCTYPE html><html lang="ja">
 <head><meta charset="utf-8"><title>BBS</title>
 <style>
-body{margin:auto;background:#FFF;position:relative;}header{background:#376169;width:100%;margin:auto;}#header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}.centre{text-align:center;}
+body{margin:auto;background:#FFF;position:relative;}
+header{background:#376169;width:100%;margin:auto;}
+#header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}.centre{text-align:center;}
 
 /*================================ここからフォームのCSS==========================================*/
 #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;/*background:red;*/}
@@ -91,7 +93,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
 
-#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;right:0;left:0;margin:auto;bottom:0;position:relative;border:solid 4px #000;border-radius:40px;background:red;}
+#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;right:0;left:0;margin:auto;bottom:0;position:relative;border:solid 4px #000;/*background:red;*/}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;
     right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
@@ -115,7 +117,8 @@ td{flex-wrap:wrap;background:transparent;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
-<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header><!--ヘッダー,書き換えなくていい-->
+<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>
+
 <div id="box">
     <form method="post", enctype = "multipart/form-data">
         <div id="form-box">
@@ -165,7 +168,6 @@ td{flex-wrap:wrap;background:transparent;}
         <?php if( !empty($message_array) ): ?>
         <?php foreach( $message_array as $value ): ?>
             <table id="postsTable">
-
                 <td class="photo"><!--画像を表示している箇所-->
                     <?php if(!empty ($value['img_data'])){;?>
                         <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
@@ -179,10 +181,8 @@ td{flex-wrap:wrap;background:transparent;}
                         <span><?php echo date('m月d日', strtotime($value['post_date'])); ?></span>
                         <span class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></span>
                     </p>
-
                 </td>
-
-            </table>
+            </table><br>
         <?php endforeach; ?>
         <?php endif; ?>
     </div>
