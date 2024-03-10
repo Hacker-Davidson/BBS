@@ -97,7 +97,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 #box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;
-    right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+    right:0;left:35%;bottom:150px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
 
 .showImg{width:95%;}
