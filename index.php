@@ -106,26 +106,27 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
 
-#box{overflow-y:scroll;height:700px;background:#FFF;width:95%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;background:red;}
+#box{overflow-y:scroll;height:700px;background:#FFF;width:100%;right:0;left:0;margin:auto;top:10px;position:relative;border:solid 4px #000;border-radius:40px;background:red;}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;
     right:0;left:35%;bottom:65px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
 
 .showImg{width:95%;}
-.time{font-size:20px;background:#ffcc00;}
 .lineHeight{line-height:0.5px;}
 #postsTable{border-bottom:solid 2px #000;width:100%;background:#ffcc00;}
-    td{flex-wrap:wrap;background:green;}
-    .box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
+
+.box0{width:95%; position:relative; right:0; left:0; margin:auto;/*background:skyblue;*/}
+td{flex-wrap:wrap;background:limegreen;}
+
     .td0{width:15%; font-size:24px;} /*time*/
     .td1{width:65%;} /*msg*/ .msg{font-size:30px;}
     .td2{width:20%; text-align:center;} /*photo*/
-    .usrName{line-height:1px;}
+    .placeName{line-height:1px;}
 </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
 <header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header><!--ヘッダー,書き換えなくていい-->
@@ -169,35 +170,36 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
         </p>
     </div>
 </form>
-    <!-- ここにメッセージの入力フォームを設置 -->
-    <div id="box">
-        <!-- ここに投稿されたメッセージを表示 -->
-        <div class="box0">
-            <?php if( !empty($message_array) ): ?>
-            <?php foreach( $message_array as $value ): ?>
-                <table id="postsTable">
-                    <td class="td0"><!--投稿時間-->
-                        <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
-                        <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
-                    </td>
+<!-- ここまでメッセージの入力フォーム -->
 
-                    <td class="td1"><!--メッセージを表示しているところ-->
-                        <h1 class="usrName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h1>
-                        <p class="msg" style="line-break:anywhere;"><?php echo $value['message']; ?></p>
-                    </td>
+<div id="box">
+    <!-- ここに投稿されたメッセージを表示 -->
+    <div class="box0">
+        <?php if( !empty($message_array) ): ?>
+        <?php foreach( $message_array as $value ): ?>
+            <table id="postsTable">
+                <td class="td0"><!--投稿時間-->
+                    <p><?php echo date('m月d日', strtotime($value['post_date'])); ?></p>
+                    <p class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></p>
+                </td>
 
-                    <td class="td2"><!--画像を表示している箇所-->
-                        <?php if(!empty ($value['img_data'])){;?>
-                            <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
-                        <?php }; ?>
-                    </td>
-                </table>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
+                <td class="td1"><!--メッセージを表示しているところ-->
+                    <h1 class="placeName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h1>
+                    <p class="msg" style="line-break:anywhere;"><?php echo $value['message']; ?></p>
+                </td>
+
+                <td class="td2"><!--画像を表示している箇所-->
+                    <?php if(!empty ($value['img_data'])){;?>
+                        <a href="<?php echo $value['img_data'];?>" data-lightbox="group"><img class="showImg" src = "<?php echo $value['img_data'];?>" alt="">
+                    <?php }; ?>
+                </td>
+            </table>
+        <?php endforeach; ?>
+        <?php endif; ?>
     </div>
+</div>
 
-    <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
+<p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 
 
 <script>
