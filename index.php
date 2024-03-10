@@ -79,9 +79,21 @@ if( $file_handle = fopen(FILENAME,'r') ) {
 <head><meta charset="utf-8"><title>BBS</title>
 <style>
 body{margin:auto;background:#FFF;position:relative;}
+.space0{
+    height:10vh;
+}
+.space1{
+    height:1vh;
+}
 header{background:#376169;width:100%;margin:auto;}
 #header{font-size:50px;text-align:center;padding-top:80px;color:#FFF;}.centre{text-align:center;}
-
+#openMenu{
+    height:calc(tan(70deg)*30px/2);
+    width:100px;
+    clip-path:polygon(5% 10%, 94% 10%,48% 100%);
+    background:#CCC;
+    margin:auto;
+}
 /*================================ここからフォームのCSS==========================================*/
 #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;/*background:red;*/}
 .form-box0{width:92%;margin:auto;}
@@ -117,15 +129,14 @@ td{flex-wrap:wrap;background:transparent;}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 <body>
-<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>
+<!--<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>-->
 
 <div id="box">
-
-    <div>
-    <div class="menu1" onclick="m0()">ABOT</div><br>
         <div id="m2">
             <form method="post", enctype = "multipart/form-data">
+                <p class="space0"></p>
                 <div id="form-box">
+                    <p class="space1"></p>
                     <p class="form-box0">
                         <textarea id="messageArea" name="message" style="width:100%;"></textarea>
                     </p>
@@ -165,7 +176,10 @@ td{flex-wrap:wrap;background:transparent;}
                 </div>
             </form>
         </div>
-    </div>
+
+        <div class="menu1" onclick="m0()">
+            <div id="openMenu"></div>
+        </div><br>
     <!-- ここまでメッセージの入力フォーム -->
 
 
@@ -198,7 +212,6 @@ td{flex-wrap:wrap;background:transparent;}
 
 <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 
-
 <script>
     document.getElementById("m2").style.display="none";
     function m0(){
@@ -209,9 +222,7 @@ td{flex-wrap:wrap;background:transparent;}
     let box=document.getElementById("box");
     let topBtn=class{
         constructor(y,blue,defaultc){
-            this.y=y;
-            this.blue=blue;
-            this.defaultc=defaultc;
+            this.y=y; this.blue=blue; this.defaultc=defaultc;
         }
     }
     let topInstance=new topBtn(0,"background:blue;","background:#00BFFF;");
@@ -225,12 +236,10 @@ td{flex-wrap:wrap;background:transparent;}
             let time=setTimeout(cntUp,100);
             console.log(cnt);
             if(cnt==2){
-                clearTimeout(time);
-                console.log("quit");
+                clearTimeout(time); console.log("quit");
                 moveBtn.style=topInstance.defaultc;
             }
-        }
-        cntUp();
+        } cntUp();
     }
     else{moveBtn.style=topInstance.defaultc;}
     box.scrollTop=topInstance.y; //0
