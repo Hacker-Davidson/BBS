@@ -70,17 +70,21 @@ header{/*background:#376169;*/width:100%;margin:auto;}
 #openMenu{
     height:calc(tan(70deg)*30px/2);
     width:100px;
-    clip-path:polygon(5% 10%, 94% 10%,48% 100%);
+    clip-path:polygon(5% 10%,94% 10%,48% 100%);
     background:#CCC;
     margin:auto;
 }
 /*================================ここからフォームのCSS==========================================*/
-#form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 3px #000;border-radius:40px;/*background:red;*/}
+#form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 1px #000;border-radius:40px;box-shadow:7px 5px 5px #888;/*background:red;*/}
 .form-box0{width:92%;margin:auto;}
 input, textarea{border:2px solid #000;box-sizing:border-box;}
 #messageArea{height:20em;font-size:10px;/*background:skyblue;*/}
 #inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}/*画像を選択のボタン*/
-#inputBtn1{color:#FFF;font-weight:bold;font-size:26px;background:#FF3300;border-radius:20px;padding:6px;}/*送信ボタン*/
+#inputBtn1{
+    color:#FFF;font-weight:700;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:26px;background:#FF3300;border-radius:20px;padding:6px;
+}/*送信ボタン*/
 /*================================ここまでフォームのCSS==========================================*/
 
 .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
@@ -91,16 +95,14 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
     left:35%;bottom:250px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
 
-.showImg{width:100%;}
+.showImg{width:100%;border-radius:30px 0 0 30px;}
 .lineHeight{line-height:0.5px;}
-#postsTable{border-radius:30px;width:90%;margin:auto;box-shadow:10px 5px 5px #888;/*background:#ffcc00;*/}
-
-/*.box0{width:95%; position:relative; right:0; left:0; margin:auto;}*/
+#postsTable{border-radius:30px;width:90%;margin:auto;box-shadow:7px 5px 5px #888;/*background:#ffcc00;*/}
 td{flex-wrap:wrap;background:transparent;}
 
 .photo{width:50%; text-align:center;}
 .comment{width:35%;} .msg{font-size:30px;line-break:anywhere;}
-.time{font-size:15px;} /*time*/
+.time{font-size:15px;}
 .placeName{line-height:1px;}
 footer{width:100%;margin:auto;/*background:red;*/}
 #footer{font-size:50px;text-align:center;padding-top:90px;color:#FFF;}
@@ -134,7 +136,7 @@ footer{width:100%;margin:auto;/*background:red;*/}
                             </p>
                             <p class="centre" style="margin-left:auto;">
                                 <span id="inputBtn1" style="padding:6px 45px;">
-                                    <label><input type="submit" name="btn_submit" style="display:none;">POST</label>
+                                    <label><input type="submit" name="btn_submit" style="display:none;">送信</label>
                                 </span>
                             </p>
                         </div>
@@ -174,11 +176,7 @@ footer{width:100%;margin:auto;/*background:red;*/}
             <td class="comment"><!--メッセージを表示しているところ-->
                 <h3 class="placeName" style="line-break:anywhere;"><?php echo $value['view_name']; ?></h3>
                 <p class="msg"><?php echo $value['message']; ?></p>
-
-                <p class="time"><!--投稿時間-->
-                    <span><?php echo date('m月d日', strtotime($value['post_date'])); ?></span>
-                    <span class="lineHeight"><?php echo date('H:i', strtotime($value['post_date'])); ?></span>
-                </p>
+                <p class="time"><span><?php echo date('m/d/H:i', strtotime($value['post_date'])); ?></span></p>
             </td>
         </table><br>
     <?php endforeach; ?>
