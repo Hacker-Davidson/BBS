@@ -74,20 +74,26 @@ header{/*background:#376169;*/width:100%;margin:auto;}
     background:#CCC;
     margin:auto;
 }
-/*================================ここからフォームのCSS==========================================*/
+#openMenu:active{
+    height:calc(tan(70deg)*30px/2);
+    width:100px;
+    clip-path:polygon(5% 10%,94% 10%,48% 100%);
+    background:#AAA;
+    margin:auto;
+}
+
 #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 1px #000;border-radius:40px;box-shadow:7px 5px 5px #888;/*background:red;*/}
 .form-box0{width:92%;margin:auto;}
 input, textarea{border:2px solid #000;box-sizing:border-box;}
-#messageArea{height:20em;font-size:15px;/*background:skyblue;*/}
+#messageArea{height:20em;font-size:15px;}
 #inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}/*画像を選択のボタン*/
 #inputBtn1{
     color:#FFF;font-weight:700;
     font-family: 'Noto Sans JP', sans-serif;
     font-size:26px;background:#FF3300;border-radius:20px;padding:6px;
 }/*送信ボタン*/
-/*================================ここまでフォームのCSS==========================================*/
 
-.display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
+.display-flex{display:flex;width:92%;margin:auto;}
 
 #box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;scroll-behavior:smooth;/*background:red;*/}
 #moveBtn{
@@ -104,7 +110,7 @@ td{flex-wrap:wrap;background:transparent;}
 .comment{width:35%;} .msg{font-size:30px;line-break:anywhere;}
 .time{font-size:15px;}
 .placeName{line-height:1px;}
-footer{width:100%;margin:auto;/*background:red;*/}
+footer{width:100%;margin:auto;}
 #footer{font-size:50px;text-align:center;padding-top:90px;color:#FFF;}
 select{text-align:center;width:150px; font-size:22px; color:#000033;border-radius:20px;}
 </style>
@@ -114,7 +120,6 @@ select{text-align:center;width:150px; font-size:22px; color:#000033;border-radiu
 </head>
 <body>
 <div id="box">
-        <!--<header><div id="header">𝗛𝗮𝗶𝗤𝘂𝗿𝗶</div></header>-->
         <header><div id="header"></div></header>
         <div id="m2">
             <p class="space0"></p>
