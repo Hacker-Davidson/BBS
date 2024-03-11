@@ -89,7 +89,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 
 .display-flex{display:flex;width:92%;margin:auto;/*background:red;*/}/*ブロック要素を横並びにするクラスなので多分必要*/
 
-#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
+#box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;scroll-behavior:smooth;/*background:red;*/}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;opacity:0.7;
     left:35%;bottom:50vh;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
