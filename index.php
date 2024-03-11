@@ -48,7 +48,7 @@ if( $file_handle=fopen(FILENAME,'r') ) {
     while( $data=fgets($file_handle) ){
         $split_data=preg_split( '/\'/', $data);
         $message=array(
-            'view_name'=>$split_data[1],
+            'view_name'=>"@".$split_data[1],
             'message'=>$split_data[3],
             'post_date'=>$split_data[5],
             'img_data'=>$split_data[7]
@@ -66,7 +66,7 @@ body{margin:auto;background:#FFF;position:relative;}
 .space0{height:10vh;}
 .space1{height:1vh;}
 header{/*background:#376169;*/width:100%;margin:auto;}
-#header{font-size:50px;text-align:center;padding-top:250px;color:#FFF;}.centre{text-align:center;}
+#header{font-size:50px;text-align:center;padding-top:150px;color:#FFF;}.centre{text-align:center;}
 #openMenu{
     height:calc(tan(70deg)*30px/2);
     width:100px;
@@ -78,7 +78,7 @@ header{/*background:#376169;*/width:100%;margin:auto;}
 #form-box{height:488px;background:#FFF;width:95%;right:0;left:0;margin:auto;bottom:50px;position:relative;border:solid 1px #000;border-radius:40px;box-shadow:7px 5px 5px #888;/*background:red;*/}
 .form-box0{width:92%;margin:auto;}
 input, textarea{border:2px solid #000;box-sizing:border-box;}
-#messageArea{height:20em;font-size:10px;/*background:skyblue;*/}
+#messageArea{height:20em;font-size:15px;/*background:skyblue;*/}
 #inputBtn0{color:#0099FF;font-size:26px;background:#DDD;border-radius:20px;}/*画像を選択のボタン*/
 #inputBtn1{
     color:#FFF;font-weight:700;
@@ -92,7 +92,7 @@ input, textarea{border:2px solid #000;box-sizing:border-box;}
 #box{overflow-y:scroll;height:100vh;background:#FFF;width:100%;margin:auto;bottom:0;position:relative;border:solid 1px #000;/*background:red;*/}
 #moveBtn{
     font-size:75px;color:#FFF;background-color:#00CCCC;opacity:0.7;
-    left:35%;bottom:250px;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
+    left:35%;bottom:50vh;margin:auto;padding:5px;position:relative;border-radius:100%;text-align:center;height:92px;width:92px;z-index:2;
 }
 
 .showImg{width:100%;border-radius:30px 0 0 30px;}
@@ -189,18 +189,26 @@ select{text-align:center;width:150px; font-size:22px; color:#000033;border-radiu
 <p id="moveBtn" onclick="moveTop()">↑</p><!--スクロール用ボタン-->
 
 <script>
-    let hoge="江ノ島";
+    let hoge0="出町桝形商店街";
+    let hoge1="七里ヶ浜";
+    let hoge2="江ノ島";
+    let hoge3="新江ノ島水族館";
+    let hoge4="藤沢駅";
+    let hoge5="秋葉原";
+    let hoge6="白川八幡神社";
+    let hoge7="新千歳空港";
+    let hoge8="日枝神社";
     document.getElementById("places").innerHTML=
             '<option value="" selected>場所を選択</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>'+
-            '<option value="'+hoge+'">'+hoge+'</option>';
+            '<option value="'+hoge0+'">'+hoge0+'</option>'+
+            '<option value="'+hoge1+'">'+hoge1+'</option>'+
+            '<option value="'+hoge2+'">'+hoge2+'</option>'+
+            '<option value="'+hoge3+'">'+hoge3+'</option>'+
+            '<option value="'+hoge4+'">'+hoge4+'</option>'+
+            '<option value="'+hoge5+'">'+hoge5+'</option>'+
+            '<option value="'+hoge6+'">'+hoge6+'</option>'+
+            '<option value="'+hoge7+'">'+hoge7+'</option>'+
+            '<option value="'+hoge8+'">'+hoge8+'</option>';
     /*htmlサイドで　if 入力欄==true{選択をdisplay:noneに}*/
 
 
